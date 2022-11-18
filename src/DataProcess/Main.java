@@ -46,20 +46,20 @@ public class Main {
         System.out.println(num_peaks);
 
         //test plots
-        ScatterPlot plt = new ScatterPlot(100, 100, 1500, 700);
+        ScatterPlot scatterPlot = new ScatterPlot(100, 100, 1500, 700);
 
         // create x-coordinates for the data
         double[] x = MathUtils.linspace(0, magnitudes .size()-1, magnitudes .size());
         List<Double> xCoords = MathUtils.toList(x);
 
-        plt.set(ScatterPlot.Setting.show_axes, true);
-        plt.set(ScatterPlot.Setting.show_border, true);
-        plt.setTextSize(20);
+        scatterPlot.set(ScatterPlot.Setting.show_axes, true);
+        scatterPlot.set(ScatterPlot.Setting.show_border, true);
+        scatterPlot.setTextSize(20);
 
-        plt.plot(xCoords, magnitudes).fillColor("red").strokeWeight(2).strokeColor("red").style("-");
-        plt.plot(xCoords, x_accel).fillColor("green").strokeWeight(2).strokeColor("green").style("-");
+        scatterPlot.plot(xCoords, magnitudes).fillColor("red").strokeWeight(2).strokeColor("red").style("-");
+        scatterPlot.plot(xCoords, x_accel).fillColor("green").strokeWeight(2).strokeColor("green").style("-");
 
-        PlotWindow window = PlotWindow.getWindowFor(plt, 800, 800);
+        PlotWindow window = PlotWindow.getWindowFor(scatterPlot, 800, 800);
         window.show();
 
     }
