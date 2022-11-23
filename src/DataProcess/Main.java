@@ -33,7 +33,7 @@ public class Main {
 
             double magnitude = accel.length();
             magnitudes.add(magnitude);
-            accelerations.add(accel.x);
+            accelerations.add(accel);
 
             if (last_magnitude > magnitude && last_magnitude > last_last_magnitude) {
                 num_peaks++;//is bigger than both neighbors
@@ -45,7 +45,7 @@ public class Main {
 
         }
         System.out.println(num_peaks);
-        DisplayUtils.plotSequentialData(magnitudes,DisplayUtils.splitAxis(accelerations));
+        DisplayUtils.plotSequentialData(magnitudes, DisplayUtils.splitAxis(accelerations)[0],DisplayUtils.splitAxis(accelerations)[1],DisplayUtils.splitAxis(accelerations)[2]);
     }
 
 }

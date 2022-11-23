@@ -26,7 +26,7 @@ public class CSV implements AutoCloseable{
         //Verify filepath type is csv
         JFileChooser chooser = new JFileChooser();
         if(!chooser.getTypeDescription(file).equals("Microsoft Excel Comma Separated Values File")){
-            throw new FileNotFoundException("Not csv file type: " + filepath);
+            //throw new FileNotFoundException("Not csv file type: " + filepath);
         }
         //Create scanner and verify that file exists
         scanner = new Scanner(file);
