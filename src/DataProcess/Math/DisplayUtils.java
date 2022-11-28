@@ -31,6 +31,7 @@ public class DisplayUtils {
             min_values_y.add(getMin(arr));
             lengths.add((double) arr.size() );
         }
+        //todo add points(in document from last class)
 
         //Create scatter plot
         ScatterPlot plot = new ScatterPlot(0, (int)getMin(min_values_y), (int)getMax(lengths), (int)getMax(max_values_y));
