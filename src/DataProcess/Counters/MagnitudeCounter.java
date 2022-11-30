@@ -1,4 +1,4 @@
-package DataProcess;
+package DataProcess.Counters;
 
 import DataProcess.IO.DataStream;
 import DataProcess.Math.Vector3;
@@ -6,7 +6,7 @@ import DataProcess.Math.Vector3;
 import java.util.ArrayList;
 
 //simple magnitude step counter
-public class MagnitudeCounter implements StepCounter{
+public class MagnitudeCounter implements StepCounter {
     ArrayList<Integer> step_indices;
     ArrayList<Double> magnitudes;
 
