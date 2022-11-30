@@ -6,6 +6,8 @@ import DataProcess.Math.Vector3;
 import java.util.ArrayList;
 import java.util.Vector;
 
+
+//sus amogus
 public class UpDownCounter implements StepCounter {
     private static final int upperBoundSquared = 400;
     private boolean isAbove = false;
