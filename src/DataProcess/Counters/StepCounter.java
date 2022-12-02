@@ -18,13 +18,13 @@ public interface StepCounter {
     int countSteps(DataStream stream);
 
     /**
-     * Get all possible data to graph
+     * Get all possible data to graph for debugging
      * @return
      */
     ArrayList<Double>[] getRelevantData();
 
     /**
-     * Get the indices in the sequntial data where steps are detected
+     * Get the indices in the sequential data where steps are detected for debugging/graphing
      * @return
      */
     ArrayList<Integer> getStepIndices();

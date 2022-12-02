@@ -9,4 +9,9 @@ public interface DataStream {
      * @return
      */
     double[] getNextRecord();
+
+    /**
+     * Reopen file, to start at beginning
+     */
+    void reset();
 }
