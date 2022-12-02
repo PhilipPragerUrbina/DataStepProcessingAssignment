@@ -7,21 +7,15 @@ import java.io.FileNotFoundException;
  */
 public class CSVStream implements DataStream {
     private CSV csv; //The file
+    private String filepath;
 
     /**
      * Open csv for stream and read header
      * @param filepath
      */
     public CSVStream (String filepath){
-        try {
-            csv = new CSV(filepath);
-            //read header
-            csv.getNextRecord();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        this.filepath = filepath;
+        open(filepath);
     }
 
     /**
@@ -42,6 +36,27 @@ public class CSVStream implements DataStream {
         } catch (Exception e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+    @Override
+    public void reset() {
+        open(filepath);
+    }
+
+    /**
+     * Open the csv file for the stream
+     * @param filepath
+     */
+    private void open(String filepath){
+        try {
+            csv = new CSV(filepath);
+            //read header
+            csv.getNextRecord();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
