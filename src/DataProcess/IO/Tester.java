@@ -1,6 +1,6 @@
 package DataProcess.IO;
 
-import DataProcess.Counters.StepCounter;
+import DataProcess.Counters.*;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -35,7 +35,7 @@ public class Tester {
 
             //create stream and counter
             DataStream stream = new CSVStream(path.toString());
-            StepCounter counter = null;
+            StepCounter counter = new DCTCounter(500);
             try {
                 counter = counter_class.getDeclaredConstructor().newInstance();
             } catch (InstantiationException | InvocationTargetException | NoSuchMethodException | IllegalAccessException e) {
@@ -43,12 +43,15 @@ public class Tester {
             }
 
             //get prediction
-            int prediction = counter.countSteps(stream);
 
+            int prediction = counter.countSteps(stream);
             //add values
             step_counts.add(prediction);
             expected_step_counts.add(actual_num_steps);
             files.add(path.toString());
+
+
+
         }
     }
 
@@ -167,5 +170,4 @@ public class Tester {
         }
         return null;
     }
-
 }
