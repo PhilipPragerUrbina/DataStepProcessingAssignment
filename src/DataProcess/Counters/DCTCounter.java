@@ -27,14 +27,20 @@ public class DCTCounter implements StepCounter{
             int i = 0;
             do{
                 stuff.add(stream.getNextRecord());
-                if(stuff.get(i).length != 6){
-                    double[][] temp = (double[][]) stuff.toArray();
+                if(stuff.get(i).equals(null) || stuff.get(i).length != 6){
+                    double[][] temp = new double[i][6];
+                    for(int j = 0; j < i; j ++){
+                        temp[j] = stuff.get(j);
+                    }
                     numSteps+=guessNextSteps(temp);
                     break boringLoop;
                 }
                 i++;
             }while(i < chunkSize);
-            double[][] temp = (double[][]) stuff.toArray();
+            double[][] temp = new double[i][6];
+            for(int j = 0; j < i; j ++){
+                temp[j] = stuff.get(j);
+            }
             numSteps+=guessNextSteps(temp);
         }
         return (numSteps);
@@ -73,7 +79,7 @@ public class DCTCounter implements StepCounter{
         for (int j = 0; j < i; j++) {
             for (int k = 0; k < i; k++) {
                 for (int l = 0; l < w; l++) {
-                    out[j][l]+= Math.cos(j*thing)*multiDim[k][l];
+                    out[j][l]+= Math.cos(j*k*thing)*multiDim[k][l];
                 }
             }
         }

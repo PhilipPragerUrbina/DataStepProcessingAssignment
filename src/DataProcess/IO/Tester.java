@@ -35,7 +35,7 @@ public class Tester {
 
             //create stream and counter
             DataStream stream = new CSVStream(path.toString());
-            StepCounter counter = new DCTCounter(500);
+            StepCounter counter = new DCTCounter(100);
             try {
                 counter = counter_class.getDeclaredConstructor().newInstance();
             } catch (InstantiationException | InvocationTargetException | NoSuchMethodException | IllegalAccessException e) {
