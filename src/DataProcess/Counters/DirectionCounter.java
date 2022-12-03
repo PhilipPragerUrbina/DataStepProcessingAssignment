@@ -12,11 +12,12 @@ import java.util.ArrayList;
 public class DirectionCounter implements StepCounter {
 
 
+
     @Override public int countSteps(DataStream stream) {
         int num_steps = 0;
 
         ArrayList<Double> rot_buffer = new ArrayList<>(); //keep track of past rotation
-        final int MINIMA_WIDTH = 4; //how wide to check for dips
+        final int MINIMA_WIDTH = 5; //how wide to check for dips
 
         while (true) { //iterate over data
             double[] record = stream.getNextRecord();   //get data
@@ -28,18 +29,19 @@ public class DirectionCounter implements StepCounter {
 
             Vector3 direction = accel.normalized(); //get direction
 
+            //The gyro values are not directly corresponding to the movement axis. The rotation axis is different depending on the phone orientation, I made some assumptions here.
             //get weighted average of rotation using direction
-            double rotation = weightedAverage(new double[]{gyro.x, gyro.y, gyro.z}, new double[]{direction.x, direction.y, direction.z});
+            double rotation = weightedAverage(new double[]{gyro.z, gyro.z, gyro.x}, new double[]{direction.x, direction.y, direction.z});
             rot_buffer.add(rotation);
+
 
             if(rot_buffer.size() == MINIMA_WIDTH * 2 + 1){
                 if(checkMinima(rot_buffer, MINIMA_WIDTH)){
                     num_steps++;
                 };
 
-                for (int i = 0; i < MINIMA_WIDTH; i++) { //move forward
                     rot_buffer.remove(0);
-               }
+
             }
 
 
