@@ -34,7 +34,7 @@ public class DisplayUtils {
         //todo add points(in document from last class)
 
         //Create scatter plot
-        ScatterPlot plot = new ScatterPlot(0, (int)getMin(min_values_y), (int)getMax(lengths), (int)getMax(max_values_y));
+        ScatterPlot plot = new ScatterPlot(0, (int)getMin(min_values_y), (int)getMax(lengths), (int)getMax(max_values_y)+300);
         plot.set(ScatterPlot.Setting.show_axes, true);
         plot.set(ScatterPlot.Setting.show_border, true);
         plot.setTextSize(20);
@@ -47,7 +47,7 @@ public class DisplayUtils {
         }
 
         // Show actual window
-        PlotWindow window = PlotWindow.getWindowFor(plot, (int)(plot.getDataViewMaxX() - plot.getDataViewMinX()), (int)(plot.getDataViewMaxY() - plot.getDataViewMinY()));
+        PlotWindow window = PlotWindow.getWindowFor(plot, 1000, 1000);
         window.show();
 
     }
@@ -69,7 +69,7 @@ public class DisplayUtils {
     public static double getMax(ArrayList<Double> array){
         double max = array.get(0);
         for (Double d: array ) {
-            if(d > max){max = d;}
+            max = Math.max(d,max);
         }
         return max;
     }
@@ -82,7 +82,7 @@ public class DisplayUtils {
     public static double getMin(ArrayList<Double> array){
         double min = array.get(0);
         for (Double d: array ) {
-            if(d < min){min = d;}
+            min = Math.min(d,min);
         }
         return min;
     }
