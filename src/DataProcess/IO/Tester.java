@@ -46,8 +46,8 @@ public class Tester {
 
             int prediction = counter.countSteps(stream);
             //add values
-            step_counts.add(prediction);
-            expected_step_counts.add(actual_num_steps);
+            step_counts.add(actual_num_steps);
+            expected_step_counts.add(prediction);
             files.add(path.toString());
 
 
@@ -63,7 +63,7 @@ public class Tester {
     public String toString() {
         String str = "";
         for (int i = 0; i < files.size(); i++) {
-            str+=  files.get(i) + "\tactual: " + step_counts.get(i) + "\t Expected: " + expected_step_counts.get(i) +
+            str+=  files.get(i) + "\tActual: " + step_counts.get(i) + "\t Predicted: " + expected_step_counts.get(i) +
                     "\t Error:" + (expected_step_counts.get(i)- step_counts.get(i)) + "\n";
         }
         return str;
@@ -90,6 +90,14 @@ public class Tester {
         double total_error = 0;
         for (int i = 0; i < files.size(); i++) {
             total_error+=  Math.pow (expected_step_counts.get(i)- step_counts.get(i),2);
+        }
+        return total_error/ (double) files.size();
+    }
+
+    public double getPercentError(){
+        double total_error = 0;
+        for (int i = 0; i < files.size(); i++) {
+            total_error+=  2*Math.abs ((expected_step_counts.get(i)- step_counts.get(i))/(step_counts.get(i) + expected_step_counts.get(i)));
         }
         return total_error/ (double) files.size();
     }
