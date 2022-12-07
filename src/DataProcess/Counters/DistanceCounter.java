@@ -20,12 +20,13 @@ public class DistanceCounter implements StepCounter {
     private static Vector3 TIME = new Vector3(50.0 / 1000.0); //TIme in seconds, 50 millisecond to seconds
     private static double STEP = 0.73152; //2.4 feet in meters. The average length of human step.
 
+    ArrayList<Integer> step_indices = new ArrayList<>();
     @Override public int countSteps(DataStream stream) {
         int num_steps = 0;
 
         Vector3 displacement = new Vector3(); //total displacement in meters
         Vector3 velocity = new Vector3(); //current velocity in m/s
-
+        int idx = 0;
         while (true) { //iterate over data
             double[] record = stream.getNextRecord();   //get data
             if (record == null || record.length != 6) {
@@ -52,7 +53,9 @@ public class DistanceCounter implements StepCounter {
                 num_steps++;//took a step
                 displacement = new Vector3(); //reset displacement
                 velocity = new Vector3(); //reset velocity to avoid drift
+                step_indices.add(idx);
             }
+            idx++;
         }
         return num_steps; //sometimes really accurate, sometimes not
     }
@@ -63,6 +66,6 @@ public class DistanceCounter implements StepCounter {
 
     @Override
     public ArrayList<Integer> getStepIndices() {
-        return new ArrayList<Integer>();
+        return step_indices;
     }
 }

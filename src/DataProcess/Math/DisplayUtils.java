@@ -19,7 +19,7 @@ public class DisplayUtils {
      * Plot numerical data, that is in sequential order
      * @param values 1 or more arrays of data to plot
      */
-    public static void plotSequentialData(ArrayList<Double>... values ){
+    public static void plotSequentialData(ArrayList<Integer> points, ArrayList<Double>... values ){
         //min and maxes of all the added arrays
         ArrayList<Double> max_values_y = new ArrayList<>();
         ArrayList<Double> min_values_y = new ArrayList<>();
@@ -34,20 +34,25 @@ public class DisplayUtils {
         //todo add points(in document from last class)
 
         //Create scatter plot
-        ScatterPlot plot = new ScatterPlot(0, (int)getMin(min_values_y), (int)getMax(lengths), (int)getMax(max_values_y)+300);
-        plot.set(ScatterPlot.Setting.show_axes, true);
-        plot.set(ScatterPlot.Setting.show_border, true);
-        plot.setTextSize(20);
+        ScatterPlot plot = new ScatterPlot(100,100,1100, 700);
+
 
         int color = 0; //color id
         for (ArrayList<Double> arr: values) {
-            //create x coords and plot each dataset
-            plot.plot(getSequentialNumbers(arr.size()), arr).strokeWeight(2).strokeColor(colors[color]).style("-");
+            for (int i = 0; i < arr.size(); i++) {
+                //create x coords and plot each dataset
+                plot.plot(0,i,arr.get(i)).strokeWeight(2).strokeColor(colors[color]).style("-");
+            }
             color = (color+1)%colors.length; //get next color id
         }
 
+        for (int i = 0; i < points.size(); i++) {
+            plot.plot(1, points.get(i), 1).strokeColor("blue").strokeWeight(5).style(".");
+        }
+
+
         // Show actual window
-        PlotWindow window = PlotWindow.getWindowFor(plot, 1000, 1000);
+        PlotWindow window = PlotWindow.getWindowFor(plot, 1200, 800);
         window.show();
 
     }
